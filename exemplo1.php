@@ -61,4 +61,38 @@
     echo $_SERVER["HTTP_USER_AGENT"] . "<BR>";
     echo $_SERVER["REMOTE_ADDR"] . "<BR>";
     echo $_SERVER["SCRIPT_NAME"] . "<BR>";
+
+    //-----------------------------operadores-------------------------------------------
+    
+    echo "<br><br>";
+    
+    if(1 == "1"){
+        echo "é igual";
+    } else{
+        echo "é diferente";
+    }
+
+    echo "<br><br>";
+
+    if(1 === "1"){
+        echo "é igual";
+    } else{
+        echo "diferente pô";
+    }
+
+    echo "<br><br>";
+    
+    if(1 != "1"){
+        echo "é diferente";
+    } else{
+        echo "é igual";
+    }
+
+    echo "<br><br>";
+    
+    if(1 !== "1"){
+        echo "é diferente";
+    } else{
+        echo "é igual";
+    }
 ?>
