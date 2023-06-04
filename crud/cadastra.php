@@ -40,13 +40,16 @@
                 <option value="Mecânica">Mecânica</option>
                 <option value="Qualidade">Qualidade</option>
             </select>
+            <br><br><input type="submit">
+            <button href="cadastra.php">Refresh</button>
         </form>
     </div>
+    <br><hr>
 </body>
 </html>
 
 <?php
-    if($_SERVER["REQUEST METHOD"] == 'POST'){
+    if($_SERVER["REQUEST_METHOD"] == 'POST'){
         try{
             $ra = $_POST["ra"];
             $nome = $_POST["nome"];
@@ -58,7 +61,7 @@
                 include("conexaoBD.php");
                 
                 //cerificando se o RA informado já existe no banco de dados para não dar exception
-                $stmt = $pdo->prepare("select * from aluno where ra = :ra");
+                $stmt = $pdo->prepare("select * from alunos where ra = :ra");
                 $stmt->bindParam(':ra', $ra);
                 $stmt->execute();
 
