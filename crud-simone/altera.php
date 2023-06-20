@@ -6,18 +6,24 @@
 </head>
 
 <body>
+
 <a href="index.html">Home</a> | <a href="consulta.php">Consulta</a>
 <hr>
+
 <h2>Edição de Alunos</h2>
-    
-<?php    
+
+</body>
+</html>
+
+<?php
+
+    include("conexaoBD.php");
+
     $ra = $_POST['ra'];
     $novoNome = $_POST['nome'];
     $novoCurso = $_POST['curso'];
 
     try {
-        include("conexaoBD.php");
-
         $stmt = $pdo->prepare('UPDATE alunos SET nome = :novoNome, curso = :novoCurso WHERE ra = :ra');
         $stmt->bindParam(':novoNome', $novoNome);
         $stmt->bindParam(':novoCurso', $novoCurso);
@@ -32,5 +38,3 @@
 
     $pdo = null;
 ?>
-</body>
-</html>

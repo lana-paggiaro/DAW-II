@@ -66,6 +66,8 @@
 
     if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
+        include("conexaoBD.php");
+
         try {            
             $ra = $_POST["ra"];
             $nome = $_POST["nome"];
@@ -74,9 +76,7 @@
             if ((trim($ra) == "") || (trim($nome) == "")) {
                 echo "<span id='warning'>RA e nome são obrigatórios!</span>";
             } else {
-                include("conexaoBD.php");
                 //verificando se o RA informado já existe no BD para não dar exception
-                    
                 $stmt = $pdo->prepare("select * from alunos where ra = :ra");
                 $stmt->bindParam(':ra', $ra);
                 $stmt->execute();
