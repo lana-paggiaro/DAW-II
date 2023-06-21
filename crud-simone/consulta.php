@@ -31,12 +31,10 @@
 
          if (isset($_POST["ra"]) && ($_POST["ra"] != "")) {
              $ra = $_POST["ra"];
-             $stmt = $pdo->prepare("select * from alunos 
-             where ra= :ra order by curso, nome");
+             $stmt = $pdo->prepare("select * from alunos where ra= :ra order by curso, nome");
              $stmt->bindParam(':ra', $ra);
          } else {
-             $stmt = $pdo->prepare("select * from alunos 
-             order by curso, nome");
+             $stmt = $pdo->prepare("select * from alunos order by curso, nome");
          }
 
          try {
