@@ -67,10 +67,17 @@ if (!isset($_POST["raAluno"])) {
                 <option value='Informática' $informatica>Informática</option>\n
                 <option value='Mecânica' $mecanica>Mecânica</option>\n
                  <option value='Qualidade' $qualidade>Qualidade</option>\n
-             </select><br><br>\n        
-             <input type='submit' value='Salvar Alterações'>\n        
-             <hr>\n
-            </form>";
+             </select><br><br>\n               
+             Foto:<br>";
+
+            if($row["foto"] == null){
+                echo "-<br><br>";
+            }else{
+                echo "<img src='data:image;base64," . base64_encode($foto) . "'width='50px'><br><br>";
+            }
+
+            echo "<input type='file' name='foto'><br><br>
+            <input type='submit' value='Salvar Alterações'>\n<hr>\n</form>";
         }
 
     } catch (PDOException $e) {

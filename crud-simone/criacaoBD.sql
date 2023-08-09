@@ -3,5 +3,6 @@ use cl201174;
 	create table alunos (
 	  ra varchar(5) not null primary key,
 	  nome varchar(50) not null,
-      curso varchar(15)
+      curso varchar(15),
+	  foto blob
 	)

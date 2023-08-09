@@ -12,7 +12,7 @@
 
 <h2>Consulta de Alunos</h2>
 <div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         RA:<br>
         <input type="text" size="10" name="ra">
@@ -31,10 +31,10 @@
 
          if (isset($_POST["ra"]) && ($_POST["ra"] != "")) {
              $ra = $_POST["ra"];
-             $stmt = $pdo->prepare("select * from alunos where ra= :ra order by curso, nome");
+             $stmt = $pdo->prepare("select * from alunos where ra= :ra order by ra, curso, nome");
              $stmt->bindParam(':ra', $ra);
          } else {
-             $stmt = $pdo->prepare("select * from alunos order by curso, nome");
+             $stmt = $pdo->prepare("select * from alunos order by ra, curso, nome");
          }
 
          try {
@@ -42,7 +42,7 @@
              $stmt->execute();
 
              echo "<form method='post'><table border='1px'>";
-             echo "<tr><th></th><th>RA</th><th>Nome</th><th>Curso</th></tr>";
+             echo "<tr><th></th><th>RA</th><th>Nome</th><th>Curso</th><th>Foto</th></tr>";
 
              while ($row = $stmt->fetch()) {
                  echo "<tr>";
@@ -51,7 +51,15 @@
                  echo "<td>" . $row['ra'] . "</td>";
                  echo "<td>" . $row['nome'] . "</td>";
                  echo "<td>" . $row['curso'] . "</td>";
+                 if($row["foto"] == null){
+                    echo "<td align='center'>--</td>";
+                 }else{
+                    echo "<td align='center'><img src='data:image;base64," . base64_encode($row['foto']) . "' width='150px'></td>";
+                 }
                  echo "</tr>";
+
+                 //base64 - maneira de codificar dados binários em texto ASCII, informando ao navegador que os dados estão embutidos
+                 //em uma imagem
              }
 
              echo "</table><br>
