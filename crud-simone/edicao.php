@@ -53,7 +53,9 @@ if (!isset($_POST["raAluno"])) {
                 $qualidade = "selected";
             }
 
-            echo "<form method='post' action='altera.php'>\n
+            $foto = $row['foto'];
+
+            echo "<form method='post' action='altera.php' enctype='multipart/form-data'>\n
             RA:<br>\n
             <input type='text' size='10' name='ra' value='$row[ra]' readonly><br><br>\n
             Nome:<br>\n
