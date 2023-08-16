@@ -51,10 +51,11 @@
                  echo "<td>" . $row['ra'] . "</td>";
                  echo "<td>" . $row['nome'] . "</td>";
                  echo "<td>" . $row['curso'] . "</td>";
-                 if($row["foto"] == null){
+                 if($row["arquivoFoto"] == null){
                     echo "<td align='center'>--</td>";
                  }else{
-                    echo "<td align='center'><img src='data:image;base64," . base64_encode($row['foto']) . "' width='150px'></td>";
+                    //echo "<td align='center'><img src='data:image;base64," . base64_encode($row['foto']) . "' width='150px'></td>";
+                    echo '<td align="center"><img src="' . $row['arquivoFoto'] . '" width="150px"></td>';
                  }
                  echo "</tr>";
 

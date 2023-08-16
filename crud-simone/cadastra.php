@@ -75,11 +75,18 @@
             $ra = $_POST["ra"];
             $nome = $_POST["nome"];
             $curso = $_POST["curso"];
+            //upload dir
+            $uploaddir = 'upload/fotos/'; //diretorio onde sera gravado a imagem
             //foto
             $foto = $_FILES["foto"];
             $nomeFoto = $foto['name'];
             $tipoFoto = $foto['type'];
             $tamanhoFoto = $foto['size'];
+
+            //gerando novo nome para a foto
+            $info = new SplFileInfo($nomeFoto);
+            $extensaoArq = $info->getExtension();
+            $novoNomeFoto = $ra . "." . $extensaoArq;
 
             if ((trim($ra) == "") || (trim($nome) == "")) {
                 echo "<span id='warning'>RA e nome são obrigatórios!</span>";
@@ -101,17 +108,19 @@
 
                 if ($rows <= 0) {
                     
-                    if($nomeFoto == ""){
-                        $fotoBinario = null;
+                    if(($nomeFoto !== "") && (move_uploaded_file($_FILES['foto']['tmp_name'], $uploaddir . $novoNomeFoto))){
+                        // caminho/nome da imagem
+                        $uploadfile = $uploaddir . $novoNomeFoto;
                     }else{
-                        $fotoBinario = file_get_contents($foto['tmp_name']);
+                        $uploadfile = null;
+                        echo "Sem upload de imagem";
                     }
 
-                    $stmt = $pdo->prepare("insert into alunos (ra, nome, curso, foto) values(:ra, :nome, :curso, :foto)");
+                    $stmt = $pdo->prepare("insert into alunos (ra, nome, curso, arquivoFoto) values(:ra, :nome, :curso, :arquivoFoto)");
                     $stmt->bindParam(':ra', $ra);
                     $stmt->bindParam(':nome', $nome);
                     $stmt->bindParam(':curso', $curso);
-                    $stmt->bindParam(':foto', $fotoBinario);
+                    $stmt->bindParam(':arquivoFoto', $uploadfile);
                     $stmt->execute();
 
                     echo "<span id='sucess'>Aluno Cadastrado!</span>";
