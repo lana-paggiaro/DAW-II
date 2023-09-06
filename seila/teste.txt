@@ -1,0 +1,4 @@
+Este arquivo foi criado<br>
+apenas para testes<br><hr>
+Criado pela incrivel lua<br><hr>
+e lido por vc, que eh mais incrivel ainda!
