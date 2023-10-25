@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login com o Google</title>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <meta name="google-signin-client_id" content="632687271229-oscg8vt2o27q9rjlmgft3b3drh4geieq.apps.googleusercontent.com"/>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cabin&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Cabin", sans-serif;
+      }
+      body {
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(58, 58, 58);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-direction: column;
+      }
+      #title {
+        font-size: 30px;
+        text-align: center;
+        margin-bottom: 20px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="title">Faça o login usando o botão abaixo:</div>
+    <div id="buttonDiv"></div>
+    <script>
+      function handleCredentialResponse(response) {
+        const data = jwt_decode(response.credential);
+        console.log(data);
+        verificar(data);
+      }
+
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id:
+            "632687271229-oscg8vt2o27q9rjlmgft3b3drh4geieq.apps.googleusercontent.com",
+          callback: handleCredentialResponse,
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          {
+            theme: "outline",
+            size: "large",
+            
+          } // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+      };
+
+      function verificar(data) {
+        if (data.email == "cl201174@g.unicamp.br") {
+          window.location = "/home.html";
+        } else {
+          window.location.href = "https://www.youtube.com/watch?v=dQx4x9WgXcQ";
+        }
+      }
+    </script>
+  </body>
+</html>
